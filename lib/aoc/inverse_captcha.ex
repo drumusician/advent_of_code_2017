@@ -1,11 +1,16 @@
 defmodule Aoc.InverseCaptcha do
   def calculate(input) when is_list(input) do
-    acc = 0
+    input
+    |> Enum.with_index()
+    |> Enum.reduce(0, fn {x, i}, acc ->
+         cond do
+           x == Enum.at(input, i - 1) ->
+             acc + x
 
-    for n <- 0..length(input) do
-      acc = acc + sum(acc, Enum.at(input, n), Enum.at(input, n - 1))
-    end
-    |> Enum.reduce(0, fn x, acc -> acc + x end)
+           true ->
+             acc
+         end
+       end)
   end
 
   def calculate(input) when is_integer(input) do
@@ -18,15 +23,5 @@ defmodule Aoc.InverseCaptcha do
     input
     |> String.to_integer()
     |> calculate
-  end
-
-  defp sum(total, digit, former_digit) do
-    cond do
-      digit == former_digit ->
-        digit
-
-      true ->
-        0
-    end
   end
 end
