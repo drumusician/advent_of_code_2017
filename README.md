@@ -1,21 +1,11 @@
-# Aoc
+# Advent of Code 2017
 
-**TODO: Add description**
+Trying to keep up with it this year... :)
 
-## Installation
+For more information about Advent of code => http://adventofcode.com/2017/about
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `aoc` to your list of dependencies in `mix.exs`:
-
-```elixir
-def deps do
-  [
-    {:aoc, "~> 0.1.0"}
-  ]
-end
+My solutions are tested and full test suite can be run with:
 ```
-
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/aoc](https://hexdocs.pm/aoc).
-
+mix test
+```
+_I am skipping the tests that produce the solutions as some of these are slow..._
