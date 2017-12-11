@@ -6,6 +6,7 @@ defmodule Aoc.Day2.EvenlyDivisibleChecksumTest do
     assert 9 == Aoc.Day2.EvenlyDivisibleChecksum.checksum(input)
   end
 
+  @tag :input
   test "it can calculate the checksum from an input file" do
     {:ok, input} = File.read("test/fixtures/input_day2.txt")
     assert 308 == Aoc.Day2.EvenlyDivisibleChecksum.checksum(input)

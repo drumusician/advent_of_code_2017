@@ -21,6 +21,7 @@ defmodule Aoc.Day1.InverseCaptchaTwoTest do
     assert 4 == Aoc.Day1.InverseCaptchaTwo.calculate(12_131_415)
   end
 
+  @tag :input
   test "sums sequence from test input" do
     test_input =
       File.read!("test/fixtures/input_day1.txt")

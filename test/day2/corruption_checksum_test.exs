@@ -11,6 +11,7 @@ defmodule Aoc.Day2.CorruptionChecksumTest do
     assert 18 == Aoc.Day2.CorruptionChecksum.checksum(input)
   end
 
+  @tag :input
   test "it can calculate the checksum from an input file" do
     {:ok, input} = File.read("test/fixtures/input_day2.txt")
     assert 58975 == Aoc.Day2.CorruptionChecksum.checksum(input)
