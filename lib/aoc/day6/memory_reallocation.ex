@@ -7,11 +7,9 @@ defmodule Aoc.Day6.MemoryReallocation do
   defp _find_infinite_loop([input | _] = full_input, runs) do
     {max, offset} = get_max(input)
     input = redistribute(input, max, offset)
-
     cond do
       Enum.member?(full_input, input) ->
         runs
-
       true ->
         _find_infinite_loop(full_input, runs + 1)
     end
