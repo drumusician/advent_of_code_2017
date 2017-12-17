@@ -16,11 +16,6 @@ defmodule Aoc.Day3.SpiralMemory do
     steps
   end
 
-  def take_step_and_sum([{n, x, y}] = steps, _direction, _iteration, _left_in_iteration, last_step)
-      when n > last_step do
-        n
-  end
-
   def take_step(steps, direction, iteration, 0, last_step) do
     case direction do
       "right" ->
@@ -32,6 +27,24 @@ defmodule Aoc.Day3.SpiralMemory do
       "down" ->
         take_step(steps, "right", iteration + 1, iteration + 1, last_step)
     end
+  end
+
+  def take_step([{n, x, y}], direction, iteration, left_in_iteration, last_step) do
+    case direction do
+      "right" ->
+        take_step([{n + 1, x + 1, y}], "right", iteration, left_in_iteration - 1, last_step)
+      "up" ->
+        take_step([{n + 1, x, y + 1}], "up", iteration, left_in_iteration - 1, last_step)
+      "left" ->
+        take_step([{n + 1, x - 1, y}], "left", iteration, left_in_iteration - 1, last_step)
+      "down" ->
+        take_step([{n + 1, x, y - 1}], "down", iteration, left_in_iteration - 1, last_step)
+    end
+  end
+
+  def take_step_and_sum([{n, _x, _y}], _direction, _iteration, _left_in_iteration, last_step)
+      when n > last_step do
+        n
   end
 
   def take_step_and_sum(steps, direction, iteration, 0, last_step) do
@@ -63,19 +76,6 @@ defmodule Aoc.Day3.SpiralMemory do
         take_step_and_sum([{sum_of_neighbours({n, x, y}), x, y - 1}], "down", iteration, left_in_iteration - 1, last_step)
     end
   end
-  
-  def take_step([{n, x, y}], direction, iteration, left_in_iteration, last_step) do
-    case direction do
-      "right" ->
-        take_step([{n + 1, x + 1, y}], "right", iteration, left_in_iteration - 1, last_step)
-      "up" ->
-        take_step([{n + 1, x, y + 1}], "up", iteration, left_in_iteration - 1, last_step)
-      "left" ->
-        take_step([{n + 1, x - 1, y}], "left", iteration, left_in_iteration - 1, last_step)
-      "down" ->
-        take_step([{n + 1, x, y - 1}], "down", iteration, left_in_iteration - 1, last_step)
-    end
-  end
 
   def sum_of_neighbours(coordinate) do
     {_, a, b} = coordinate
@@ -87,7 +87,7 @@ defmodule Aoc.Day3.SpiralMemory do
 
   def get_value_for_coordinate({x, y}) do
     case :ets.lookup(:coordinates, {x, y}) do
-      [{{x, y}, value}] ->
+      [{{_x, _y}, value}] ->
        value
       [] ->
         0
